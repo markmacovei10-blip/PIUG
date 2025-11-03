@@ -8,15 +8,16 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-DV8L1ZNY4P');
 </script>
-  
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Contact - Primăria Ilia</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Contact - Primăria Ilia</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
+
 <body>
   <nav class="navbar">
     <div class="brand">Primăria Ilia</div>
@@ -37,16 +38,21 @@
     <h1>Contact</h1>
     <p>Completează formularul pentru a trimite un mesaj către primărie.</p>
 
-    <form id="contact-form" class="contact-form">
-      <input type="text" name="name" placeholder="Nume complet" required/>
-      <input type="email" name="email" placeholder="Adresa de email" required/>
-      <input type="tel" name="phone" placeholder="Număr telefon" required/>
+    <!-- Formular activ real -->
+    <form action="https://formspree.io/f/mvgvnjwr" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Nume complet" required>
+      <input type="email" name="email" placeholder="Adresa de email" required>
+      <input type="tel" name="phone" placeholder="Număr telefon" required>
       <textarea name="message" rows="6" placeholder="Mesaj" required></textarea>
       <div style="display:flex;gap:10px;align-items:center">
         <button type="submit">Trimite</button>
         <button type="reset" style="background:#ddd;color:#111;border-radius:6px;padding:8px 12px">Reset</button>
       </div>
     </form>
+
+    <p style="margin-top:15px;font-weight:bold;display:none" id="form-success">
+       Mesajul a fost trimis cu succes! Vă mulțumim!
+    </p>
 
     <h3>Date contact</h3>
     <p>Adresa: Str. Libertății, Ilia, județul Hunedoara</p>
@@ -61,7 +67,29 @@
   <div class="scroll-btn down-btn"><i class="fa fa-arrow-down"></i></div>
 
   <script src="script.js"></script>
+
+  <!-- Script pentru mesaj de confirmare -->
+  <script>
+    const form = document.querySelector("form");
+    const successMsg = document.getElementById("form-success");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.reset();
+        successMsg.style.display = "block";
+      } else {
+        alert("A apărut o eroare. Vă rugăm să încercați din nou.");
+      }
+    });
+  </script>
 </body>
 </html>
-
-
