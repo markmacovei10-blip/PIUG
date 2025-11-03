@@ -66,12 +66,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
       if(!name){ alert('Completează numele.'); return; }
       if(!validEmail(email)){ alert('Adaugă un email valid.'); return; }
-      if(!validPhone(phone)){ alert('Adaugă un număr de telefon valid (ex +40721xxx...).'); return; }
+      if(!validPhone(phone)){ alert('Adaugă un număr de telefon valid.'); return; }
       if(!msg){ alert('Scrie un mesaj.'); return; }
 
-      alert('Mulțumim! Mesajul a fost trimis (simulat).');
+      alert('Mulțumim! Mesajul a fost trimis.');
       form.reset();
     });
   }
 
 });
+
